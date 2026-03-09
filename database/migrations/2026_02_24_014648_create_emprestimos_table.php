@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('midias', function (Blueprint $table) {
-            $table->foreignId('categoria_id')->constrained('categorias')->onDelete('cascade');
+        Schema::create('emprestimos', function (Blueprint $table) {
+            $table->id();
+            $table->decimal('valor', 10,2);
+            $table->text('justificativa');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -21,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('emprestimos');
     }
 };
